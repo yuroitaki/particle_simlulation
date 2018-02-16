@@ -3,13 +3,13 @@ package simulation;
 public abstract class AbstractEvent implements Event {
 
 
-    private final double event_time; 
+    private final double eventTime; 
     /**
      * Constructor for AbstractEvent.
      */
     public AbstractEvent(double time) {
         // TODO implement the constructor
-	event_time = time;
+	eventTime = time;
     }
 
     /**
@@ -19,7 +19,7 @@ public abstract class AbstractEvent implements Event {
     public double time() {
         // TODO implement this method
 	
-        return event_time;
+        return eventTime;
     }
 
     /**
@@ -37,9 +37,5 @@ public abstract class AbstractEvent implements Event {
 	}
 	else
 	    return 1;
-    }
-
-    public String toString() {
-	return "Event at " + time();
     }
 }

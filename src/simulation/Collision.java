@@ -2,18 +2,18 @@ package simulation;
 
 public abstract class Collision extends AbstractEvent{
 
-    protected Particle[] particle_arr;
-    private int[] hit_count;
+    protected Particle[] particleArr;
+    private int[] hitCount;
     /**
      * Constructor for Collision
      */
     public Collision(double t, Particle[] ps) {
-        // TODO implement constructori
+        // TODO implement constructor
 	super(t);
-	particle_arr = ps;
-	hit_count  = new int[particle_arr.length];
-	for(int i=0;i< particle_arr.length;i++){
-	    hit_count[i] = particle_arr[i].collisions();
+	particleArr = ps;
+	hitCount  = new int[particleArr.length];
+	for(int i=0;i< particleArr.length;i++){
+	    hitCount[i] = particleArr[i].collisions();
 	}
     }
 
@@ -22,9 +22,9 @@ public abstract class Collision extends AbstractEvent{
      */
     @Override
     public boolean isValid() {
-        // TODO implement his method
-	for (int i=0;i< hit_count.length;i++){
-	    if(hit_count[i]!=particle_arr[i].collisions()){
+        // TODO implement this method
+	for (int i=0;i< hitCount.length;i++){
+	    if(hitCount[i]!=particleArr[i].collisions()){
 		return false;
 	    }
 	}
@@ -36,6 +36,6 @@ public abstract class Collision extends AbstractEvent{
      */
     public Particle[] getParticles() {
         // TODO implement this method
-        return particle_arr;
+        return particleArr;
     }
 }

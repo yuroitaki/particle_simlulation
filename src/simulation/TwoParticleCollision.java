@@ -8,10 +8,10 @@ public class TwoParticleCollision extends Collision{
 
     @Override 
     public void happen(ParticleEventHandler h) {
-	int first_particle_index = 0;
-	int second_particle_index = 1;
-	Particle p1 = particle_arr[first_particle_index];
-	Particle p2 = particle_arr[second_particle_index];
+	int 1stParticleIndex = 0;
+	int 2ndParticleIndex = 1;
+	Particle p1 = particleArr[1stParticleIndex];
+	Particle p2 = particleArr[2ndParticleIndex];
 	p1.collide(p1,p2);
 	h.reactTo(this);
     }
