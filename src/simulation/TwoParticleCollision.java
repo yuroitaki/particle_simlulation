@@ -12,7 +12,7 @@ public class TwoParticleCollision extends Collision{
 	int secondParticleIndex = 1;
 	Particle p1 = particleArr[firstParticleIndex];
 	Particle p2 = particleArr[secondParticleIndex];
-	p1.collide(p1,p2);
+	p1.collide(p1,p2);      // update the particle's state
 	h.reactTo(this);
     }
 }

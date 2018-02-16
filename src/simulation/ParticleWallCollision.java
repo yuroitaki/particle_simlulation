@@ -13,7 +13,7 @@ public class ParticleWallCollision extends Collision{
     public void happen(ParticleEventHandler h) {
 	int firstParticleIndex = 0;
 	Particle p = particleArr[firstParticleIndex];
-	p.collide(p,wall);
+	p.collide(p,wall);      // update the particle's state
 	h.reactTo(this);
     }
 }

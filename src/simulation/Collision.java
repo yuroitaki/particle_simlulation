@@ -11,9 +11,9 @@ public abstract class Collision extends AbstractEvent{
         // TODO implement constructor
 	super(t);
 	particleArr = ps;
-	hitCount  = new int[particleArr.length];
-	for(int i=0;i< particleArr.length;i++){
-	    hitCount[i] = particleArr[i].collisions();
+	hitCount  = new int[particleArr.length]; 
+	for(int i=0;i< particleArr.length;i++){        // store the hit count of each particle
+	    hitCount[i] = particleArr[i].collisions(); // when the Collision event is created
 	}
     }
 
@@ -23,8 +23,8 @@ public abstract class Collision extends AbstractEvent{
     @Override
     public boolean isValid() {
         // TODO implement this method
-	for (int i=0;i< hitCount.length;i++){
-	    if(hitCount[i]!=particleArr[i].collisions()){
+	for (int i=0;i< hitCount.length;i++){              // check if the original hit counts is
+	    if(hitCount[i]!=particleArr[i].collisions()){  // still the same as the current one
 		return false;
 	    }
 	}

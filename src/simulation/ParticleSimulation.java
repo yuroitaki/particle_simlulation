@@ -12,7 +12,6 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
     private final ParticlesModel          model;
     private final ParticlesView           screen;
 
-    // what type should min queue be
     private MinPriorityQueue<Event> queue;
 
     /**
@@ -38,20 +37,27 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
         }
         
         // TODO complete implementing this method
+
+	// create the queue and add Tick event	
 	double currentTime = 1;
 	double previousTime;
 	queue = new MinPriorityQueue();	
-	// add Tick event for the current time
 	queue.add(new Tick(currentTime));
 
-	// predict collision events for all particles in their initial state
+	// predict Collision events for all particles in the initial state 
+	// and add these collisions to the queue
 	Iterable<Collision> predictedCollision = model.predictAllCollisions(currentTime);
 	queue.addList(predictedCollision);
 
 	Event currentEvent;
+
+	// loop until the queue is empty
 	while(!queue.isEmpty()) {
+
+	    // get the event that will happen next
 	    currentEvent = queue.remove();
-	    //System.out.println(currentEvent.time());
+
+	    // if the event is valid, update all particles 
 	    if(currentEvent.isValid()){
 		previousTime = currentTime;
 		currentTime = currentEvent.time();
@@ -61,20 +67,26 @@ public class ParticleSimulation implements Runnable, ParticleEventHandler{
 	}
     }
 
+    // update the screen and add new Tick event 
     public void reactTo(Tick t) {
+
 	try {
 	    Thread.sleep(FRAME_INTERVAL_MILLIS);
 	} catch (Exception e) {
 	    System.err.println("Exception: " + e );
 	}
+
 	screen.update();
 	queue.add(new Tick(t.time() + 1));
 		
     }
 	
+    // get the particles related to this collision and add the predicted collisions to the queue
     public void reactTo(Collision c) {
+
 	Particle[] particles = c.getParticles();
 	Iterable<Collision> cs = null;
+
 	for(Particle p : particles) {
 	    cs = model.predictCollisions(p, c.time());
 	    queue.addList(cs);
